@@ -12,16 +12,16 @@
         android:theme="@style/Theme.Weather"
         tools:targetApi="31">
         <activity
-            android:name=".SettingActivity"
+            android:name=".view.SettingActivity"
             android:exported="false" />
         <activity
-            android:name=".Third_Activity"
+            android:name=".view.Third_Activity"
             android:exported="false" />
         <activity
-            android:name=".UpdateActivity"
+            android:name=".view.UpdateActivity"
             android:exported="false" />
         <activity
-            android:name=".SecondActivity"
+            android:name=".view.SecondActivity"
             android:exported="false" />
         <activity
             android:name=".view.MainActivity"

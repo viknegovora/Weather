@@ -36,15 +36,12 @@ public class SecondActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
 
-            switch () {
-                case recyclerView:
-                    // переключение на новую активность
-                    Intent intent = new Intent(getApplicationContext(),Third_Activity.class);
-                    startActivity(intent);
-                case fabadd:
-                    // переключение на новую активность
-                    Intent intent1 = new Intent(getApplicationContext(),UpdateActivity.class);
-                    startActivity(intent1);
+            if (recyclerView.equals(SecondActivity.this)) {// переключение на новую активность
+                Intent intent = new Intent(getApplicationContext(), Third_Activity.class);
+                startActivity(intent);
+            } else if (fabadd.equals(SecondActivity.this)) {// переключение на новую активность
+                Intent intent1 = new Intent(getApplicationContext(), UpdateActivity.class);
+                startActivity(intent1);
             }
         }
     };

@@ -17,9 +17,10 @@ import com.example.weather.R;
 import com.example.weather.model.City;
 import com.example.weather.view.UpdateActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     // поля адаптера
     private Context context; // поле для контекста
@@ -27,25 +28,27 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<City> cityList; // поле для всех записей
     private List<City> newList; // поле для новой записи
 
-    public Adapter(Context context, Activity activity, List<City> cityList, List<City> newList) {
+
+
+    // конструктор
+    public Adapter(Context context, Activity activity, List<City> notesList) {
         this.context = context;
         this.activity = activity;
         this.cityList = cityList;
-        this.newList = newList;
+        newList = new ArrayList<>(cityList);
     }
 
     // метод onCreateViewHolder() возвращает объект ViewHolder(), который будет хранить данные по одному объекту City
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // трансформация layout-файла во View-элемент
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.city_recycler_view, parent, false);
         return new ViewHolder(view);
     }
 
-    // метод onBindViewHolder() выполняет привязку объекта ViewHolder к объекту City по определенной позиции
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.title.setText(cityList.get(position).getTitle());
 
         // обработаем нажатие на контейнер city_recycler_view
@@ -63,11 +66,11 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         });
     }
 
-
     @Override
     public int getItemCount() {
-        return 0;
+        return cityList.size();
     }
+
 
     // созданный статический класс ViewHolder
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -83,4 +86,5 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 }
+
 
