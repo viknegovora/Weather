@@ -39,13 +39,20 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/fabadd"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:backgroundTint="#1F4976"
         android:clickable="true"
-        app:srcCompat="@drawable/fabadd"
-        tools:layout_editor_absoluteX="336dp"
-        tools:layout_editor_absoluteY="633dp" />
+        android:tintMode="add"
+        app:tint="@null"
+        app:fabCustomSize="80dp"
+        app:maxImageSize="59dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="14dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/fabadd" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
