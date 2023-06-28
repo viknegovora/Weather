@@ -25,19 +25,23 @@ import java.net.URL;
 import javax.net.ssl.HttpsURLConnection;
 
 public class Third_Activity extends AppCompatActivity implements Runnable {
-
+// https://api.openweathermap.org/data/2.5/weather?q=Krasnodar&appid=40603b445c6f4f66747d2e19e34136c6&units=metric&lang=ru
     // создание полей
     private TextView infoCity; // поле информации о населённом пункте
     private TextView infoTemperature; // поле информации о температуре
-    private Button buttonSetting; // поле кнопки перехода к настройкам
+    private TextView infoDay; // поле информации о температуре утром и вечером
+    private TextView Wind;
+
+    private String weather;
+
     private SharedPreferences settings; // поле настроек приложения
     private final String APP_WEATHER = "Weather"; // константа названия настроек
     private final String CITY = "City"; // константа названия переменной города
     // дополнительные поля интернет соединения
     private final String URL_SERVER = "https://api.openweathermap.org/data/2.5/weather?q="; // url сервера
-    private final String KEY = "40603b445c6f4f66747d2e19e34136c6"; // ключ доступа к сервисам сервера (получается при регистрации на https://openweathermap.org)
+    private final String KEY = "&appid=40603b445c6f4f66747d2e19e34136c6"; // ключ доступа к сервисам сервера (получается при регистрации на https://openweathermap.org)
     private final String EXTRA_OPTIONS = "&units=metric&lang=ru"; // настройки поиска на русском языке
-    private String choiceCity; // поле названия населённого пункта
+    private String title; // поле названия населённого пункта
     private String request; // url для запросов на сервер
     private String response; // ответ с сервера в виде JSON
     private HttpsURLConnection connection; // поле интернет соединения
@@ -52,37 +56,34 @@ public class Third_Activity extends AppCompatActivity implements Runnable {
         // присваивание id полям
         infoCity = findViewById(R.id.infoCity);
         infoTemperature = findViewById(R.id.infoTemperature);
-        buttonSetting = findViewById(R.id.buttonSetting);
+        infoDay = findViewById(R.id.infoDay);
+        Wind = findViewById(R.id.Wind);
 
-        // создание объекта работы с настройками приложения
-        settings = getSharedPreferences(APP_WEATHER, MODE_PRIVATE);
-        // считывание настроек выбранного города, данной переменной назначается NoCity если данной настройки нет
-        choiceCity = settings.getString(CITY, "NoCity");
+        // считывание данных из переданного намерения Intent
+        Intent intent = getIntent();
+        // запись этих данных на экран активности
+        title = intent.getStringExtra("title");
+
+//        // создание объекта работы с настройками приложения
+//        settings = getSharedPreferences(APP_WEATHER, MODE_PRIVATE);
+//        // считывание настроек выбранного города, данной переменной назначается NoCity если данной настройки нет
+//        title = settings.getString(CITY, "NoCity");
 
         // вывод на экран информации о городе
-        infoCity.setText("В населённом пункте " + choiceCity);
+        infoCity.setText(title);
 
         infoTemperature.setText("Данные обновляются ..."); // вывод данных до получения данных с сервера
 
         handler = new Handler(); // создание объекта обработчика сообщений
         new Thread(this).start(); // запуск фонового потока
 
-        // обработка нажатия кнопоки
-        buttonSetting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // переключение на активность просмотра погоды
-                intent = new Intent(getApplicationContext(), SettingActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     // метод дополнительного потока для интернет соединения и определения погоды в заданном населённом пункте
     @Override
     public void run() {
         // определение url для запросов на сервер
-        request = URL_SERVER + choiceCity + KEY + EXTRA_OPTIONS;
+        request = URL_SERVER + title + KEY + EXTRA_OPTIONS;
         // запрос на сервер
         try {
             URL url = new URL(request); // создание url ссылки для запроса на сервер
@@ -107,7 +108,14 @@ public class Third_Activity extends AppCompatActivity implements Runnable {
                 public void run() {
                     // вывод данных с JSON файла
                     try {
-                        infoTemperature.setText(jsonObject.getJSONObject("main").getDouble("temp") + " градусов");
+                        weather = "";
+                        weather = jsonObject.getJSONArray("weather").getJSONObject(0).getString("description");
+                        weather = weather.substring(0, 1).toUpperCase() + weather.substring(1);
+                        infoTemperature.setText(Math.round(jsonObject.getJSONObject("main").getDouble("temp")) + "");
+                        infoDay.setText(Math.round(jsonObject.getJSONObject("main").getDouble("temp_max")) + " C / " + Math.round(jsonObject.getJSONObject("main").getDouble("temp_min")) + " C");
+                        /// давление * 0.750064
+
+                        Wind.setText(weather);
                     } catch (JSONException e) { // исключение отсутствия JSON объекта
                         e.printStackTrace();
                     }

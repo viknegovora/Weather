@@ -41,8 +41,12 @@
         android:layout_height="70dp"
         android:backgroundTint="#D38329"
         android:text="Добавить"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="409dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.066"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintVertical_bias="0.151" />
 
     <Button
         android:id="@+id/delete_city"
@@ -50,7 +54,11 @@
         android:layout_height="70dp"
         android:backgroundTint="#D38329"
         android:text="Удалить"
-        tools:layout_editor_absoluteX="206dp"
-        tools:layout_editor_absoluteY="409dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.809"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintVertical_bias="0.151" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

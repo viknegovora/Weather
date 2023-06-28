@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.weather.R;
 
@@ -21,7 +22,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // присваивание id полям
-        imageButton = findViewById(R.id.imageButton);
+        imageButton = findViewById(R.id.SQDate);
+
+
 
         // обработка нажатия кнопки
         imageButton.setOnClickListener(listener);

@@ -1,5 +1,6 @@
 package com.example.weather.viewmodel;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -15,7 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.weather.R;
 import com.example.weather.model.City;
+import com.example.weather.view.Third_Activity;
 import com.example.weather.view.UpdateActivity;
+import com.example.weather.view.SecondActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,13 +28,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     // поля адаптера
     private Context context; // поле для контекста
     private Activity activity; // поле для активности
-    private List<City> cityList; // поле для всех записей
-    private List<City> newList; // поле для новой записи
+
+    private List<City> cityList; // поле для всех городов
+    private List<City> newList; // поле для нового города
 
 
 
     // конструктор
-    public Adapter(Context context, Activity activity, List<City> notesList) {
+    public Adapter(Context context, Activity activity, List<City> cityList) {
         this.context = context;
         this.activity = activity;
         this.cityList = cityList;
@@ -48,7 +52,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(Adapter.ViewHolder holder, int position) {
         holder.title.setText(cityList.get(position).getTitle());
 
         // обработаем нажатие на контейнер city_recycler_view
@@ -56,10 +60,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             @Override
             public void onClick(View view) {
                 // задание переключения на новый экран
-                Intent intent = new Intent(context, UpdateActivity.class);
+                Intent intent = new Intent(context, Third_Activity.class);
                 // передача данных в новую активити
                 intent.putExtra("title", cityList.get(position).getTitle());
-                intent.putExtra("id", cityList.get(position).getId());
                 // старт перехода
                 activity.startActivity(intent);
             }

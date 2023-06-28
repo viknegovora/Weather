@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.example.weather.model.City;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     // поля базы данных
@@ -90,6 +92,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // возврат курсора
         return  cursor;
+    }
+
+    // 3) удаление из таблицы БД
+    public void deleteAllCity() {
+
+        // проверка подключения к БД
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        // формирование запроса удаления из таблицы БД
+        String query = "DELETE FROM " + tableName;
+        database.execSQL(query);
+
     }
 
     // 4) обновление записи в БД

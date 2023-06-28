@@ -53,11 +53,11 @@ public class UpdateActivity extends AppCompatActivity {
                 // обработка кнопки
                 switch (view.getId()) {
                     case R.id.update_city:
-                        // обновление заметки
+                        // обновление города
                         database.updateCity(title.getText().toString(), id); // обновление записи в БД по id
                         break;
                     case R.id.delete_city:
-                        // удаление заметки
+                        // удаление города
                         database.deleteSingleItem(id); // удаление записи в БД по id
                         break;
                 }

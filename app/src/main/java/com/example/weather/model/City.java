@@ -3,23 +3,23 @@ package com.example.weather.model;
 public class City {
 
     // поля сущности
-    private String id;// поле идентификатора города
+//    private String id;// поле идентификатора города
     private String title;// поле заголовка города
 
     //конструктор
 
-    public City(String id, String title) {
-        this.id = id;
+    public City(String title) {
+//        this.id = id;
         this.title = title;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
+//    public String getId() {
+//        return id;
+//    }
+//
+//    public void setId(String id) {
+//        this.id = id;
+//    }
 
     public String getTitle() {
         return title;
