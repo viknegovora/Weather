@@ -31,8 +31,11 @@ public class Third_Activity extends AppCompatActivity implements Runnable {
     private TextView infoTemperature; // поле информации о температуре
     private TextView infoDay; // поле информации о температуре утром и вечером
     private TextView Wind;
-
+    private TextView infoHumidity;// поле влажности
+    private TextView infoPressure;// поле давления
     private String weather;
+    private Double pressure;
+    private Double humidity;
 
     private SharedPreferences settings; // поле настроек приложения
     private final String APP_WEATHER = "Weather"; // константа названия настроек
@@ -52,12 +55,19 @@ public class Third_Activity extends AppCompatActivity implements Runnable {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        try
+        {
+            this.getSupportActionBar().hide();
+        }
+        catch (NullPointerException e){}
         setContentView(R.layout.activity_third);
         // присваивание id полям
         infoCity = findViewById(R.id.infoCity);
         infoTemperature = findViewById(R.id.infoTemperature);
         infoDay = findViewById(R.id.infoDay);
         Wind = findViewById(R.id.Wind);
+        infoHumidity = findViewById(R.id.infoHumidity);
+        infoPressure = findViewById(R.id.infoPressure);
 
         // считывание данных из переданного намерения Intent
         Intent intent = getIntent();
@@ -111,10 +121,15 @@ public class Third_Activity extends AppCompatActivity implements Runnable {
                         weather = "";
                         weather = jsonObject.getJSONArray("weather").getJSONObject(0).getString("description");
                         weather = weather.substring(0, 1).toUpperCase() + weather.substring(1);
-                        infoTemperature.setText(Math.round(jsonObject.getJSONObject("main").getDouble("temp")) + "");
-                        infoDay.setText(Math.round(jsonObject.getJSONObject("main").getDouble("temp_max")) + " C / " + Math.round(jsonObject.getJSONObject("main").getDouble("temp_min")) + " C");
+                        pressure = jsonObject.getJSONObject("main").getDouble("pressure");
+                        pressure = pressure * 0.750064;
+//                        textView.setText("36.6\u00B0");
+                        humidity = jsonObject.getJSONObject("main").getDouble("humidity");
+                        infoTemperature.setText(Math.round(jsonObject.getJSONObject("main").getDouble("temp")) + "\u00B0");
+                        infoDay.setText("Макс.: " + Math.round(jsonObject.getJSONObject("main").getDouble("temp_max")) + "\u00B0 Мин.: " + Math.round(jsonObject.getJSONObject("main").getDouble("temp_min")) + "\u00B0");
                         /// давление * 0.750064
-
+                        infoPressure.setText("Давление " + Math.round(pressure) +" мм р.с.");
+                        infoHumidity.setText("Влажность " + Math.round(humidity) + "%");
                         Wind.setText(weather);
                     } catch (JSONException e) { // исключение отсутствия JSON объекта
                         e.printStackTrace();

@@ -8,64 +8,48 @@
     tools:context=".view.SecondActivity">
 
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="328dp"
-        android:layout_height="73dp"
-        android:background="@null"
-        android:backgroundTint="@null"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.085"
-        app:srcCompat="@drawable/city" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_List"
-        android:layout_width="333dp"
-        android:layout_height="526dp"
-        android:layout_margin="64dp"
-        android:layout_marginTop="64dp"
+        android:layout_width="363dp"
+        android:layout_height="404dp"
         android:background="@drawable/shape_recycler_view"
-        android:padding="1dp"
+        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabadd"
         android:layout_width="80dp"
         android:layout_height="80dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="40dp"
         android:backgroundTint="#1F4976"
         android:clickable="true"
         android:tintMode="add"
-        app:tint="@null"
         app:fabCustomSize="80dp"
-        app:maxImageSize="59dp"
-        android:layout_marginEnd="14dp"
-        android:layout_marginBottom="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/fabadd" />
+        app:layout_constraintHorizontal_bias="0.872"
+        app:layout_constraintStart_toEndOf="@+id/fabdelete"
+        app:maxImageSize="59dp"
+        app:srcCompat="@drawable/fabadd"
+        app:tint="@null" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabdelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="312dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="40dp"
         android:backgroundTint="#1F4976"
         android:clickable="true"
         android:tintMode="add"
         app:fabCustomSize="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.138"
+        app:layout_constraintStart_toStartOf="parent"
         app:maxImageSize="59dp"
         app:srcCompat="@drawable/delete_all"
         app:tint="@null" />
